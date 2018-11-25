@@ -4,9 +4,9 @@ sudo docker-compose build
 sudo docker-compose up
 
 
-sudo docker-compose down && sudo docker-compose up --build
+sudo killall docker-containerd-shim && sudo docker-compose build && sudo docker-compose up
 
-
+sudo kill $(sudo lsof -t -i:5432)
 
 
 sudo docker rmi $(sudo docker images -q)

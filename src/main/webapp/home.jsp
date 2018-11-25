@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <t:wrapper2>
 
@@ -16,7 +17,7 @@
 	      	 <div align="center">
 		            <form class="mt-2 mt-md-0"  action="/search" method="get">
 		            <br>
-		            <input type="text" name="query" value="${param.query}">
+		            <input type="text" name="query" value="${fn:escapeXml(param.query)}">
 		            <button class="btn btn-success my-2 my-sm-0" type="submit" value="">Search</button>
     			 </form >
 			</div>
@@ -25,7 +26,7 @@
 				<div style="overflow-y: scroll; height: 100px;">
 				<c:if test="${searchquery != null}">
 			    <div class="alert alert-info" role="alert">
-			    		Searching result for <strong><c:out value="${searchquery}"/></strong> 
+			    		Searching result for <strong><c:out value="${fn:escapeXml(searchquery) }"/></strong> 
 				</div>
 				<c:forEach items="${users}" var="user">
 			          Last name: <c:out value="${user.lastname}"/> - Username: <c:out value="${user.username}"/><br>
