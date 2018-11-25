@@ -7,14 +7,14 @@
 	<div class="loginpage text-center">
 	
 		<form class="form-login" method="post">
-			<h1 class='h3 mb-3 font-weight-normal'>Register form</h1>
+			<h1 class='h3 mb-3 font-weight-normal'>Register</h1>
+			<input type="text" name="firstname" class="form-control" placeholder="your first name" required>
+			<input type="text" name="lastname" class="form-control" placeholder="your last name" required>
 			<input type="text" name="username" class="form-control" placeholder="username" required>
 			<input type="password" name="password" class="form-control" placeholder="password" required>
 			<input type="password" name="re-password" class="form-control" placeholder="re-enter password" required 
 					onchange="validate()">
-			<input type="text" name="firstname" class="form-control" placeholder="your first name" required>
-			<input type="text" name="lastname" class="form-control" placeholder="your last name" required>
-			<div class="g-recaptcha" data-sitekey="6LefDkwUAAAAAH20_0jZI2JNic67TnXNgXX1Ge75"></div>
+			<br>
 			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
 			<p class="error" style="color:red">

@@ -5,66 +5,52 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:wrapper>
-	  <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8 blog-main">
-          <h3 class="pb-3 mb-4 font-italic border-bottom">
-            Welcome to XVulB
-          </h3>
-		  <c:if test="${searchquery != null}">
-		    <div class="alert alert-info" role="alert">
-		    		Searching result for <strong>
-					  <c:out value="${searchquery}"/>
-		  		</strong> 
-			</div>	
-		  </c:if>   
-		  <c:forEach items="${posts}" var="post">
-		    <div class="blog-post">
-		      <h2 class="blog-post-title">
-		        <a class="title" href="post?id=${post.id}" >
-		          <c:out value="${post.title}"/>
-		        </a>
-		      </h2>
-		      <p class="blog-post-meta"><c:out value="${post.createdDay}"/> by <a href="#"><c:out value="${post.createdBy}"/></a></p>
-		      <div style="text-align:  justify;">
-		      <c:choose>
-    				<c:when test="${fn:length(post.content) gt 201}">
-		      		${post.content.substring(0,200)}... <a href="post?id=${post.id}">Read more</a>
-		      	</c:when>
-		      	<c:otherwise>
-		      		${post.content}
-		      	</c:otherwise>
-		      </c:choose>
-		      </div>
-		    </div>
-          </c:forEach>
+	<main role="main" class="container">
+			<div class="box">
+			   <div class="div1">1st</div>
+			   <div class="div2">2nd</div>
+			   <div class="clear">
+			</div>
 
-          <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-          </nav>
-        </div><!-- /.blog-main -->
 
-        <aside class="col-md-4 blog-sidebar">
-          <div class="p-3 mb-3 bg-light rounded" style="text-align:  justify;">
-            <h4 class="font-italic">About us</h4>
-            <p class="mb-0">We work in IT Security Department of mgm Technology Partners. If you have any questions, please contact us:</p>
-			<ul>
-					<li>Dennis.Stoetzel@mgm-sp.com-<em> Managing Principal IT Security Department</em> </li>
-			</ul>
-          </div>
 
-          <div class="p-3">
-            <h4 class="font-italic">Archives</h4>
-            <ol class="list-unstyled mb-0">
-              <li><a href="#">April 2018</a></li>
-              <li><a href="#">March 2018</a></li>
-            </ol>
-          </div>
-        </aside><!-- /.blog-sidebar -->
 
-      </div><!-- /.row -->
+		<div class="split left">
+			  <div class="centered">
+			    <div class="text-center">
+			    <form class="form-login" action="/login" method="post">
+			        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+			        <label for="username" class="sr-only">Username</label>
+			        <input type="text" name="username" class="form-control" placeholder="username" required="">
+			        <label for="password" class="sr-only">Password</label>
+			        <input type="password" name="password" class="form-control" placeholder="password" required="">
+			        <p>Don't have an account ? Register <a href="/signup"> here </a></p>
+			        <br>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			    </form>
+			</div>
+		  </div>
+		</div>
 
+		<div class="split right">
+		  <div class="centered">
+		    <div class="centered">
+			    <div class="text-center">
+			    <form class="form-login" action="/login" method="post">
+			        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+			        <label for="username" class="sr-only">Username</label>
+			        <input type="text" name="username" class="form-control" placeholder="username" required="">
+			        <label for="password" class="sr-only">Password</label>
+			        <input type="password" name="password" class="form-control" placeholder="password" required="">
+			        <p>Don't have an account ? Register <a href="/signup"> here </a></p>
+			        <br>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			    </form>
+			</div>
+		  </div>
+		</div>
+
+
+				
     </main><!-- /.container -->
-	
 </t:wrapper>

@@ -19,9 +19,6 @@ public class LoginController {
 	SessionService sessionService;
 	
 	@Autowired
-	CaptchaService captchaService;
-	
-	@Autowired
 	PasswordService passwordService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -39,14 +36,6 @@ public class LoginController {
 			HttpServletResponse response, Model model) {
 		String username = request.getParameter("username");  
 		String password = request.getParameter("password"); 
-		String g_recaptcha_response = request.getParameter("g-recaptcha-response");
-		
-
-		if(!captchaService.verifyResponse(g_recaptcha_response)) {
-			model.addAttribute("errorMessage", "You're going too fast");
-			return "login";
-				
-		}
 		
 		boolean isValidUser =  userService.validateUser(username, password);
 		if (!isValidUser) {
@@ -66,7 +55,7 @@ public class LoginController {
             response.addCookie(loginCookie);
             sessionService.delBySessionId(loginCookie.getValue());
         }	
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@Autowired
@@ -96,7 +85,7 @@ public class LoginController {
         			return "redirect:/home";
         return "signup";
     }
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, 
 			HttpServletResponse response, Model model) {
@@ -104,34 +93,23 @@ public class LoginController {
 		String password = request.getParameter("password"); 
 		String firstname = request.getParameter("firstname"); 
 		String lastname = request.getParameter("lastname"); 
-		String g_recaptcha_response = request.getParameter("g-recaptcha-response");
-
-		if(!captchaService.verifyResponse(g_recaptcha_response)) {
-			model.addAttribute("errorMessage", "You're going too fast");
-			return "signup";
-				
-		}
-
+		
 		if (!userService.findByUsername(username).isEmpty()) {
 			model.addAttribute("errorMessage", "User is existed");
             return "signup";
         }
 		
-		String salt = passwordService.getRandomString(8);
 		User user = new User (username, password, firstname, lastname);
-		
-		user.setPassword(passwordService.pbkdf2(password, salt));
-		user.setSalt(salt);
-			
-		if (!userService.addUser(user, salt)) {
+
+		if (!userService.addUser(user)) {
 			model.addAttribute("errorMessage", "Cannot register");
             return "signup";
 		}
 		
 		setSessionCookie(request, response, username);
-		return "redirect:/home";
+		return "redirect:/login";
 	}
-	
+
 	private void setSessionCookie(HttpServletRequest request, 
 			HttpServletResponse response, String username) {
 

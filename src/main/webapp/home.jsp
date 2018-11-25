@@ -9,56 +9,44 @@
 <div class="row">
 <h3 class="pb-3 mb-4 font-italic border-bottom">Welcome, <b style="color:blue">${username}</b></h3>
 </div>
- <div class="row">	
-  <div class="col-md-4">	
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-          Change password
-      </h5>
-    </div>
-
-        <div class="card-body">
-        <form action="/password" method="post">
-        	  <input type="hidden" name="username" value="${username}">
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">New Password</label>
-		    <input type="password" class="form-control" name="password1" id="exampleInputPassword1" placeholder="Password">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword2">Verify</label>
-		    <input type="password" class="form-control" name="password2" id="exampleInputPassword2" placeholder="Password">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-      </div>
-	</div>
-	</div>
-	<div class="col-md-8">
-	<div class="card">
-	   <div class="card-header" id="headingTwo">
-	      <h5 class="mb-0">
-	        New post
-	      </h5>
+  	<div class="card" style="width: 100%">
+  		<div class="card-header" id="headingTwo">
 	    </div>
 	       <div class="card-body">
-	       <form action="/post" method="post">
-	          <input type="hidden" name="username" value="${username}">
-			  <div class="form-group">
-			    <label for="post-title">Title</label>
-			    <input type="text" class="form-control" name="post-title" id="post-title" placeholder="post title">
+	      	 <div align="center">
+		            <form class="mt-2 mt-md-0"  action="/search" method="get">
+		            <br>
+		            <input type="text" name="query" value="${param.query}">
+		            <button class="btn btn-success my-2 my-sm-0" type="submit" value="">Search</button>
+    			 </form >
+			</div>
+			<div align="center">
+				<h3>List users</h3>
+				<div style="overflow-y: scroll; height: 100px;">
+				<c:if test="${searchquery != null}">
+			    <div class="alert alert-info" role="alert">
+			    		Searching result for <strong><c:out value="${searchquery}"/></strong> 
+				</div>
+				<c:forEach items="${users}" var="user">
+			          Last name: <c:out value="${user.lastname}"/> - Username: <c:out value="${user.username}"/><br>
+         		 </c:forEach>
+				</div>	
+		  </c:if>  
+				
+			</div>
+				</div>
+			    <label for="post-title">How do you feel now?</label>
+			    <input type="text" class="form-control" name="post-title" id="post-title" placeholder="Very happy">
 			  </div>
-		
 			  <div class="form-group">
-			    <label for="post-content">Content</label>
-			    <textarea class="form-control" id="post-content" name="post-content" rows="4"></textarea>
+			    <label for="post-content">What make you feel that?</label>
+			    <textarea class="form-control" id="post-content" name="post-content" rows="4" placeholder="Today, I meet my crush. It make me happy, etc."></textarea>
 			  </div>
-			  <button type="submit" class="btn btn-primary">Submit</button>
-			  
+			  <button type="submit" class="btn btn-primary" onClick="alert("Ok")">Submit</button>
 			  <c:if test="${isSuccess != null}">
 			    <c:choose>
 			  		<c:when test="${isSuccess}">
-					<p style="color:green">Adding new post succeeded</p>
+					<p style="color:green">Adding succeeded</p>
 					</c:when>
 					<c:otherwise>
 					<p style="color:red">Something went wrong</p>
@@ -66,43 +54,7 @@
 				</c:choose>
 			</c:if>
 			</form> 
-	       </div>
+	    </div>
 	</div>
-	</div>
-  </div>
- </div> 
-<br>
-<div class="container panel">
-<div class="row">
-<h3 class="pb-3 mb-4 font-italic border-bottom">List of users</h3>
 </div>
-
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Password (PBKDF2) </th>
-                <th>Salt</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                
-            </tr>
-            <c:forEach items="${users}" var="user">
-            <tr>
-                <td><c:out value="${user.id}" /></td>
-                <td><c:out value="${user.username}" /></td>
-                <td><c:out value="${user.password}" /></td>
-                <td><c:out value="${user.salt}" /></td>
-                <td><c:out value="${user.firstname}" /></td>
-                <td><c:out value="${user.lastname}" /></td>
-            </tr>
-            </c:forEach>
-            
-        </table>
-        </div>
-
-</div>
-<div></div>
 </t:wrapper2>

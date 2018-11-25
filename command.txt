@@ -1,0 +1,18 @@
+
+sudo killall docker-containerd-shim
+sudo docker-compose build
+sudo docker-compose up
+
+
+sudo docker-compose down && sudo docker-compose up --build
+
+
+
+
+sudo docker rmi $(sudo docker images -q)
+sudo docker rmi postgres
+sudo docker image prune 
+if download fail
+sudo nano /etc/resolv.conf
+change nameserver to 8.8.8.8
+

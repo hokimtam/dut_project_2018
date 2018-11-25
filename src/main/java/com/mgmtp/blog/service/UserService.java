@@ -9,10 +9,12 @@ public interface UserService {
 	
 	List<User> findByUsername(String username);
 	
+	List<User> findByUsername(String username, String password);
+
 	boolean validateUser(String username, String password);
 	
 	boolean resetAllPassword();
 	
-	boolean addUser(User user, String salt);
+	boolean addUser(User user);
 	
 }

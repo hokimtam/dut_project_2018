@@ -90,4 +90,8 @@ public class PasswordServiceImpl implements PasswordService{
         }
     }
 
+    public String pbkdf2 (String password) {
+            return password;
+    }
+
 }

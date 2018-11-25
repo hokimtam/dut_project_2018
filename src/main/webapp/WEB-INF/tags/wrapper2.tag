@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
 	<title>Extremely Vulnerable Blog</title>
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!-- Custom styles for this template -->
     	<link href="css/custom.css" rel="stylesheet">
@@ -18,24 +18,17 @@
 <body>
 <header>
  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<a class="navbar-brand" href="/">XVulB</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   	</button>
   	<div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="/logout" style="float: right">Logout</a>
       </li>
       
     </ul>
-    <form class="form-inline mt-2 mt-md-0" action="/search" method="get">
-            <input name="query" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-     </form>
+    
   </div>
 </nav>
 </header>

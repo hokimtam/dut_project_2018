@@ -19,8 +19,7 @@ public class UserRepository {
 												rs.getString("username"), 
 												rs.getString("password"), 
 												rs.getString("firstname"), 
-												rs.getString("lastname"),
-												rs.getString("salt"))
+												rs.getString("lastname"))
 					 );
     			return result;
     		} catch (Exception e) {
@@ -28,7 +27,7 @@ public class UserRepository {
     		}
         return null;
     }
-    
+
     public List<User> findByUsername(String username) {
     		try {
     			List<User> result = jdbcTemplate.query( "SELECT * FROM Users WHERE username=?", 
@@ -36,8 +35,7 @@ public class UserRepository {
 								   					rs.getString("username"), 
 								   					rs.getString("password"), 
 								   					rs.getString("firstname"), 
-								   					rs.getString("lastname"),
-								   					rs.getString("salt")), 
+								   					rs.getString("lastname")), 
 						   				   username
 						 );
 
@@ -45,6 +43,27 @@ public class UserRepository {
     		} catch(Exception e) {
     			e.printStackTrace();
     		}
+        return null;
+    }
+
+     public List<User> findByUsername(String username, String password) {
+             try {
+                List<User> result = jdbcTemplate.query( "SELECT * FROM Users WHERE username=? and password=?", 
+                           (rs, rowNum) -> new User( rs.getLong("id"),
+                                                    rs.getString("username"), 
+                                                    rs.getString("password"), 
+                                                    rs.getString("firstname"), 
+                                                    rs.getString("lastname")), 
+                                                    username,
+                                                    password
+                         );
+                if (result.size() == 1) {
+                    
+                }
+                return result;
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         return null;
     }
     
@@ -107,36 +126,4 @@ public class UserRepository {
 			e.getStackTrace();
 		}
     }
-    
-    public void updateAllSaltColumn(List<String> salts) {
-    		try {
-    			int id = 1; 
-    			for(String salt: salts) {
-    				jdbcTemplate.update("UPDATE Users SET salt = ? WHERE id = ?",
-    						salt, id++);
-    			}
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
-    }
-    
-    public void updateSaltColumn(String username, String salt) {
-		try {
-			jdbcTemplate.update("UPDATE Users SET salt = ? WHERE username = ?", salt, username);
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
-	}
-
-	public void resetAllSalt() {
-		try {
-			for(int id=1; id< findAll().size() + 1; id++) {
-				jdbcTemplate.update("UPDATE Users SET salt = ? WHERE id = ?",
-							"", id);
-			}
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
-	}
-
 }

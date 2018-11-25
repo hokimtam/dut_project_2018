@@ -10,6 +10,6 @@ public interface PasswordService {
 	
 	public List<String> getInitialPassword(int numberOfPass, int passwordLength);
 	
-	public String pbkdf2 (String password, String salt);
+	public String pbkdf2 (String password);
 	
 }
